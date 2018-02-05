@@ -18,4 +18,19 @@ class PostsController < ApplicationController
 	  @post.save
 	  redirect_to post_path(@post)
 	end
+
+	def edit
+		@post = Post.find_by(id: params[:id])
+	end
+
+	def update
+		@post = Post.find_by(id: params[:id])
+			if params[:description] == "".empty?
+				@post.update(title: params[:title])
+			else
+				@post.update(title: params[:title], description: params[:description])
+			end
+		redirect_to post_path(@post)
+	end
+
 end
